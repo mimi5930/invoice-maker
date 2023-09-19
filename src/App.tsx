@@ -2,6 +2,9 @@ import { PDFViewer } from "@react-pdf/renderer";
 import { Page, Text, View, Document } from "@react-pdf/renderer";
 import TableHeader from "./components/table/TableHeader";
 import TableBody from "./components/table/TableBody";
+import TableFooter from "./components/table/TableFooter";
+import DetailsHeader from "./components/details-table/DetailsHeader";
+import DetailsBody from "./components/details-table/DetailsBody";
 
 export default function App() {
   return (
@@ -36,6 +39,14 @@ export default function App() {
                   description="Performances"
                   unitPrice={125}
                 />
+                <TableFooter />
+              </View>
+              <View>
+                <Text style={{ fontFamily: "Times-Bold" }}>Details:</Text>
+              </View>
+              <View>
+                <DetailsHeader />
+                <DetailsBody />
               </View>
             </View>
           </Page>
