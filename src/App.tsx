@@ -1,5 +1,6 @@
 import { PDFViewer } from "@react-pdf/renderer";
 import { Page, Text, View, Document } from "@react-pdf/renderer";
+import TableHeader from "./components/table/TableHeader";
 
 export default function App() {
   return (
@@ -21,6 +22,9 @@ export default function App() {
                 <Text>Address</Text>
                 <Text>City</Text>
                 <Text>Phone</Text>
+              </View>
+              <View>
+                <TableHeader />
               </View>
             </View>
           </Page>
