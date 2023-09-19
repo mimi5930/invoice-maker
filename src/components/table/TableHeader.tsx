@@ -6,6 +6,8 @@ export default function TableHeader() {
       style={{
         display: "flex",
         flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
         width: "100%",
         border: "1px solid black",
       }}
@@ -15,6 +17,7 @@ export default function TableHeader() {
           width: "15%",
           textAlign: "center",
           borderRight: "1px solid black",
+          padding: "2px",
         }}
       >
         QTY
@@ -24,6 +27,7 @@ export default function TableHeader() {
           width: "35%",
           textAlign: "center",
           borderRight: "1px solid black",
+          padding: "2px",
         }}
       >
         Description
@@ -33,11 +37,14 @@ export default function TableHeader() {
           width: "25%",
           textAlign: "center",
           borderRight: "1px solid black",
+          padding: "2px",
         }}
       >
         Unit Price
       </Text>
-      <Text style={{ width: "25%", textAlign: "center" }}>Amount</Text>
+      <Text style={{ width: "25%", textAlign: "center", padding: "2px" }}>
+        Amount
+      </Text>
     </View>
   );
 }
