@@ -10,25 +10,30 @@ type DataProps = {
   performanceDates: Date[];
 };
 
-export default function RateTable(data: DataProps) {
+export default function RateTable({
+  rehearsalDates,
+  rehearsalRate,
+  performanceDates,
+  performanceRate,
+}: DataProps) {
   return (
     <View>
       <TableHeader />
       <TableBody
-        quantity={data.rehearsalDates.length}
+        quantity={rehearsalDates.length}
         description="Rehearsals"
-        unitPrice={data.rehearsalRate}
+        unitPrice={rehearsalRate}
       />
       <TableBody
-        quantity={data.performanceDates.length}
+        quantity={performanceDates.length}
         description="Performances"
-        unitPrice={data.performanceRate}
+        unitPrice={performanceRate}
       />
       <TableFooter
-        rehearsalDates={data.rehearsalDates}
-        rehearsalRate={data.rehearsalRate}
-        performanceDates={data.performanceDates}
-        performanceRate={data.performanceRate}
+        rehearsalDates={rehearsalDates}
+        rehearsalRate={rehearsalRate}
+        performanceDates={performanceDates}
+        performanceRate={performanceRate}
       />
     </View>
   );
