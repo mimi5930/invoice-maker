@@ -1,8 +1,7 @@
 import { PDFViewer } from "@react-pdf/renderer";
 import { Page, Text, View, Document } from "@react-pdf/renderer";
-import DetailsHeader from "./components/details-table/DetailsHeader";
-import DetailsBody from "./components/details-table/DetailsBody";
 import RateTable from "./components/rate-table/RateTable";
+import DetailsTable from "./components/details-table/DetailsTable";
 
 type Data = {
   rehearsalRate: number;
@@ -16,13 +15,13 @@ export default function App() {
     rehearsalRate: 80,
     performanceRate: 125,
     rehearsalDates: [
-      new Date(9 / 13 / 2022),
-      new Date(3 / 24 / 2023),
-      new Date(3 / 31 / 2023),
-      new Date(8 / 20 / 2023),
-      new Date(9 / 10 / 2023),
+      new Date("9 / 13 / 2022"),
+      new Date("3 / 24 / 2023"),
+      new Date("3 / 31 / 2023"),
+      new Date("8 / 20 / 2023"),
+      new Date("9 / 10 / 2023"),
     ],
-    performanceDates: [new Date(3 / 24 / 2023)],
+    performanceDates: [new Date("3 / 24 / 2023"), new Date("2 / 3 / 2023")],
   };
 
   return (
@@ -54,10 +53,11 @@ export default function App() {
               <View>
                 <Text style={{ fontFamily: "Times-Bold" }}>Details:</Text>
               </View>
-              <View>
-                <DetailsHeader />
-                <DetailsBody />
-              </View>
+
+              <DetailsTable
+                rehearsalDates={data.rehearsalDates}
+                performanceDates={data.performanceDates}
+              ></DetailsTable>
             </View>
           </Page>
         </Document>
