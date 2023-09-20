@@ -1,4 +1,5 @@
 
-export function formatShortDate(date: Date) {
-    return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
+export function formatDate(date: Date) {
+    return date.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) 
 }
+

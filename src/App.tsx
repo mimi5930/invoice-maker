@@ -2,8 +2,14 @@ import { PDFViewer } from "@react-pdf/renderer";
 import { Page, Text, View, Document } from "@react-pdf/renderer";
 import RateTable from "./components/rate-table/RateTable";
 import DetailsTable from "./components/details-table/DetailsTable";
+import { formatDate } from "./utils/formatDate";
 
 type Data = {
+  name: string;
+  date: Date;
+  address: string;
+  city: string;
+  phone: string;
   rehearsalRate: number;
   performanceRate: number;
   rehearsalDates: Date[];
@@ -12,6 +18,11 @@ type Data = {
 
 export default function App() {
   const data: Data = {
+    name: "Test Name",
+    date: new Date(),
+    address: "lorem",
+    city: "ipsum",
+    phone: "000-000-0000",
     rehearsalRate: 80,
     performanceRate: 125,
     rehearsalDates: [
@@ -35,14 +46,14 @@ export default function App() {
               </View>
               {/* Name and Date */}
               <View>
-                <Text>Name, Last Name</Text>
-                <Text>Date</Text>
+                <Text>{data.name}</Text>
+                <Text>{formatDate(data.date)}</Text>
               </View>
               {/* Contact info */}
               <View id="contact-info">
-                <Text>Address</Text>
-                <Text>City</Text>
-                <Text>Phone</Text>
+                <Text>{data.address}</Text>
+                <Text>{data.city}</Text>
+                <Text>{data.phone}</Text>
               </View>
               <RateTable
                 rehearsalRate={data.rehearsalRate}
