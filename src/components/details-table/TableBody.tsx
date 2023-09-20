@@ -1,13 +1,12 @@
 import { View, Text } from "@react-pdf/renderer";
-import { formatShortDate } from "../../utils/formatDate";
 
-type DateTableProps = {
+type TableBodyProps = {
   dates: Date[];
   header: string;
   width: string;
 };
 
-export default function DateTable({ dates, header, width }: DateTableProps) {
+export default function TableBody({ dates, header, width }: TableBodyProps) {
   return (
     <View
       style={{
@@ -37,7 +36,7 @@ export default function DateTable({ dates, header, width }: DateTableProps) {
               padding: "2px",
             }}
           >
-            {formatShortDate(date)}
+            {date.toLocaleDateString()}
           </Text>
         );
       })}

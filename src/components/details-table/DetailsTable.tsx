@@ -1,5 +1,5 @@
 import { View } from "@react-pdf/renderer";
-import DateTable from "./DateTable";
+import TableBody from "./TableBody";
 
 type DetailsTableProps = {
   performanceDates: Date[];
@@ -18,8 +18,8 @@ export default function DetailsTable({
         width: "100%",
       }}
     >
-      <DateTable dates={rehearsalDates} header="Rehearsals" width="45%" />
-      <DateTable dates={performanceDates} header="Performances" width="45%" />
+      <TableBody dates={rehearsalDates} header="Rehearsals" width="45%" />
+      <TableBody dates={performanceDates} header="Performances" width="45%" />
     </View>
   );
 }
