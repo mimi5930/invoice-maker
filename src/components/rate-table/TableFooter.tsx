@@ -1,9 +1,15 @@
 import { View, Text } from "@react-pdf/renderer";
 
-// type dataProps = number[];
-
-export default function TableFooter() {
-  //   const total = data.reduce((sum, current) => sum + current);
+type DataProps = {
+  rehearsalRate: number;
+  performanceRate: number;
+  rehearsalDates: Date[];
+  performanceDates: Date[];
+};
+export default function TableFooter(data: DataProps) {
+  const total =
+    data.rehearsalRate * data.rehearsalDates.length +
+    data.performanceRate * data.performanceDates.length;
 
   return (
     <View
@@ -45,7 +51,7 @@ export default function TableFooter() {
           fontWeight: "bold",
         }}
       >
-        {320 + 125}
+        {total}
       </Text>
     </View>
   );
