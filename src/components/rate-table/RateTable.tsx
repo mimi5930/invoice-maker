@@ -3,7 +3,7 @@ import TableHeader from "./TableHeader";
 import TableBody from "./TableBody";
 import TableFooter from "./TableFooter";
 
-type DataProps = {
+type RateTableProps = {
   rehearsalRate: number;
   performanceRate: number;
   rehearsalDates: Date[];
@@ -15,7 +15,7 @@ export default function RateTable({
   rehearsalRate,
   performanceDates,
   performanceRate,
-}: DataProps) {
+}: RateTableProps) {
   return (
     <View>
       <TableHeader />

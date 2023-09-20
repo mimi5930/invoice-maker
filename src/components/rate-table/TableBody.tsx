@@ -1,13 +1,17 @@
 import { View, Text } from "@react-pdf/renderer";
 
-type dataProp = {
+type TableBodyProps = {
   quantity: number;
   description: string;
   unitPrice: number;
 };
 
-export default function TableBody(data: dataProp) {
-  const amount = data.quantity * data.unitPrice;
+export default function TableBody({
+  quantity,
+  description,
+  unitPrice,
+}: TableBodyProps) {
+  const amount = quantity * unitPrice;
 
   return (
     <View
@@ -28,7 +32,7 @@ export default function TableBody(data: dataProp) {
           padding: "2px",
         }}
       >
-        {data.quantity}
+        {quantity}
       </Text>
       <Text
         style={{
@@ -37,7 +41,7 @@ export default function TableBody(data: dataProp) {
           padding: "2px",
         }}
       >
-        {data.description}
+        {description}
       </Text>
       <Text
         style={{
@@ -47,7 +51,7 @@ export default function TableBody(data: dataProp) {
           padding: "2px",
         }}
       >
-        {data.unitPrice}
+        {unitPrice}
       </Text>
       <Text
         style={{
