@@ -25,9 +25,10 @@ export default function TableBody({ dates, header, width }: TableBodyProps) {
       >
         {header}
       </Text>
-      {dates.map((date) => {
+      {dates.map((date, index) => {
         return (
           <Text
+            key={index}
             style={{
               width: width,
               borderRight: "1px solid black",
