@@ -6,19 +6,22 @@ import { PDFDownloadLink } from "@react-pdf/renderer";
 import Invoice from "./components/document/Invoice";
 import { z } from "zod";
 import { createDateObjects } from "./utils/formatDate";
+import { Form, useForm } from "react-hook-form";
+import FormInput from "./components/form/FormInput";
 
 // TODO Add Zod input validation
 
 export type FormData = {
-  name?: string;
-  date?: Date;
-  address?: string;
-  city?: string;
-  phone?: string;
-  rehearsalRate?: number;
-  performanceRate?: number;
-  rehearsalDates?: Date[];
-  performanceDates?: Date[];
+  title: string;
+  name: string;
+  date: Date;
+  address: string;
+  city: string;
+  phone: string;
+  rehearsalRate: number;
+  performanceRate: number;
+  rehearsalDates: Date[];
+  performanceDates: Date[];
 };
 
 const formSchema = z.object({
@@ -37,67 +40,40 @@ export default function App() {
   const [documentDate, setDocumentDate] = useState<Value>(new Date());
   const [rehearsalDays, setRehearsalDays] = useState<Value>([]);
   const [performanceDays, setPerformanceDays] = useState<Value>([]);
-  const [formData, setFormData] = useState<FormData>({});
-  const [title, setTitle] = useState<string>("");
+  const { register, handleSubmit, setValue } = useForm<FormData>();
 
-  function handleFormSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    // TODO: Insert validation here
+  function onSubmit(data: FormData) {
     if (!documentDate || !rehearsalDays || !performanceDays) {
-      console.error("Dates needed");
       return;
     }
-
     const { date, rehearsalDateArr, performanceDateArr } = createDateObjects(
       documentDate,
       rehearsalDays,
       performanceDays
     );
-
-    setFormData({
-      ...formData,
-      date: date,
-      rehearsalDates: rehearsalDateArr,
-      performanceDates: performanceDateArr,
-    });
+    setValue("date", date, { shouldValidate: true });
+    setValue("rehearsalDates", rehearsalDateArr, { shouldValidate: true });
+    setValue("performanceDates", performanceDateArr, { shouldValidate: true });
+    console.log(data);
   }
 
   return (
     <div className="h-screen bg-blue-400">
       <h1 className="text-2xl text-center pt-2 font-bold">Invoice Maker</h1>
-      <form className="m-5 mx-10" onSubmit={(e) => handleFormSubmit(e)}>
+      <form className="m-5 mx-10" onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-1 flex gap-1">
-          <div>
-            <label
-              className="mb-1 block text-base font-medium text-[#07074D]"
-              htmlFor="title"
-            >
-              Document Title
-            </label>
-            <input
-              className="h-7 rounded-md border border-[#e0e0e0] bg-white py-3 text-base  text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-xl"
-              id="title"
-              type="text"
-              onChange={(e) => setTitle(e.target.value)}
-            />
-          </div>
-          <div>
-            <label
-              htmlFor="name"
-              className="mb-1 block text-base font-medium text-[#07074D]"
-            >
-              Name
-            </label>
-            <input
-              className="h-7 rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base  text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-xl"
-              id="name"
-              type="text"
-              onChange={(e) =>
-                setFormData({ ...formData, name: e.target.value })
-              }
-            />
-          </div>
+          <FormInput
+            id="title"
+            labelTitle="Document Title"
+            data="title"
+            register={register}
+          />
+          <FormInput
+            id="name"
+            labelTitle="Name"
+            data="name"
+            register={register}
+          />
         </div>
         <div>
           <label
@@ -140,92 +116,40 @@ export default function App() {
             </button>
           </DatePicker>
         </div>
-        <div className="mb-1">
-          <label
-            className="mb-1 block text-base font-medium text-[#07074D]"
-            htmlFor="address"
-          >
-            Address
-          </label>
-          <input
-            id="address"
-            type="text"
-            className="h-7 rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base  text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-xl"
-            onChange={(e) =>
-              setFormData({ ...formData, address: e.target.value })
-            }
-          />
-        </div>
-        <div className="mb-1">
-          <label
-            className="mb-1 block text-base font-medium text-[#07074D]"
-            htmlFor="city"
-          >
-            City, State, Zip
-          </label>
-          <input
-            id="city"
-            type="text"
-            className="h-7 rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base  text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-xl"
-            onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-          />
-        </div>
-        <div>
-          <label
-            className="mb-1 block text-base font-medium text-[#07074D]"
-            htmlFor="phone"
-          >
-            Phone
-          </label>
-          <input
-            id="city"
-            type="tel"
-            className="h-7 rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base  text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-xl"
-            onChange={(e) =>
-              setFormData({ ...formData, phone: e.target.value })
-            }
-          />
-        </div>
-        <h2 className="text-center mt-3">Rates</h2>
+        <FormInput
+          id="address"
+          labelTitle="Address"
+          data="address"
+          register={register}
+        />
+        <FormInput
+          id="city"
+          labelTitle="City, State, Zip"
+          data="city"
+          register={register}
+        />
+        <FormInput
+          id="phone"
+          labelTitle="Phone"
+          data="phone"
+          register={register}
+        />
+        <h2 className="justify-self-center mt-3">Rates</h2>
         <div className="flex">
-          <div>
-            <label
-              className="mb-1 block text-base font-medium text-[#07074D]"
-              htmlFor="rehearsal-rate"
-            >
-              Rehearsals
-            </label>
-            <input
-              id="rehearsal-rate"
-              type="number"
-              className="h-7 rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base  text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-xl"
-              onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  rehearsalRate: Number(e.target.value),
-                })
-              }
-            />
-          </div>
-          <div>
-            <label
-              className="mb-1 block text-base font-medium text-[#07074D]"
-              htmlFor="performance-rate"
-            >
-              Performances
-            </label>
-            <input
-              id="performance-rate"
-              className="h-7 rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base  text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-xl"
-              type="number"
-              onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  performanceRate: Number(e.target.value),
-                })
-              }
-            />
-          </div>
+          <FormInput
+            id="rehearsal-rate"
+            labelTitle="Rehearsals"
+            type="number"
+            data="rehearsalRate"
+            register={register}
+          />
+          <FormInput
+            id="performance-rate"
+            labelTitle="Performances"
+            type="number"
+            data="performanceRate"
+            register={register}
+          />
         </div>
         <h2 className="mb-1 block text-base font-medium text-[#07074D]">
           Rehearsal Dates
