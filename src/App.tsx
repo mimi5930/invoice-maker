@@ -12,18 +12,19 @@ export default function App() {
     register,
     handleSubmit,
     setValue,
-    formState: { errors },
+    formState: { errors, isValid },
+    getValues,
   } = useForm<FormData>({ resolver: zodResolver(formSchema) });
-
-  function onSubmit(data: FormData) {
-    console.log(errors);
-    console.log(data);
-  }
 
   return (
     <div className="h-screen bg-blue-400">
-      <h1 className="text-2xl text-center pt-2 font-bold">Invoice Maker</h1>
-      <form className="m-5 mx-10" onSubmit={handleSubmit(onSubmit)}>
+      <h1 className="pt-2 text-center text-2xl font-bold">Invoice Maker</h1>
+      <form
+        className="m-5 mx-10"
+        onSubmit={handleSubmit((data) => {
+          console.log("success!", data);
+        })}
+      >
         <div className="mb-1 flex gap-1">
           <FormInput
             id="title"
@@ -73,7 +74,7 @@ export default function App() {
             format="MM/DD/YYYY"
           >
             <button
-              className="bg-[#0074d9] mr-4 mb-1 px-3 py-2 text-sm shadow-sm font-medium tracking-wider text-blue-100 rounded-full hover:shadow-2xl hover:bg-[#7EA6F0]"
+              className="mb-1 mr-4 rounded-full bg-[#0074d9] px-3 py-2 text-sm font-medium tracking-wider text-blue-100 shadow-sm hover:bg-[#7EA6F0] hover:shadow-2xl"
               onClick={() => {
                 setValue("date", new Date());
               }}
@@ -103,7 +104,7 @@ export default function App() {
           register={register}
           errors={errors}
         />
-        <h2 className="justify-self-center mt-3">Rates</h2>
+        <h2 className="mt-3 justify-self-center">Rates</h2>
         <div className="flex">
           <FormInput
             id="rehearsal-rate"
@@ -137,7 +138,7 @@ export default function App() {
                   .map((currentDate) => {
                     return new Date(currentDate);
                   }),
-                { shouldValidate: true }
+                { shouldValidate: true },
               );
             }
           }}
@@ -152,7 +153,6 @@ export default function App() {
             backgroundColor: "white",
             paddingTop: "0.75rem",
             paddingBottom: "0.75rem",
-            paddingLeft: "1.5rem",
             paddingRight: "1.5rem",
             fontSize: "1rem",
             lineHeight: "1.5rem",
@@ -175,7 +175,7 @@ export default function App() {
                   .map((currentDate) => {
                     return new Date(currentDate);
                   }),
-                { shouldValidate: true }
+                { shouldValidate: true },
               );
             }
           }}
@@ -190,7 +190,6 @@ export default function App() {
             backgroundColor: "white",
             paddingTop: "0.75rem",
             paddingBottom: "0.75rem",
-            paddingLeft: "1.5rem",
             paddingRight: "1.5rem",
             fontSize: "1rem",
             lineHeight: "1.5rem",
@@ -199,21 +198,23 @@ export default function App() {
           }}
         ></DatePicker>
         <button
-          className="bg-[#0074d9] mr-2 px-3 py-2 text-sm shadow-sm font-medium tracking-wider text-blue-100 rounded-full hover:shadow-2xl hover:bg-[#7EA6F0]"
+          className="mr-2 rounded-full bg-[#0074d9] px-3 py-2 text-sm font-medium tracking-wider text-blue-100 shadow-sm hover:bg-[#7EA6F0] hover:shadow-2xl"
           type="submit"
+          disabled={!isValid}
         >
-          Submit
+          Validate
         </button>
       </form>
-
-      <div>
-        {/* <PDFDownloadLink
-          document={<Invoice data={formData} />}
-          fileName={title + ".pdf"}
+      {isValid && (
+        <PDFDownloadLink
+          document={<Invoice data={getValues()} />}
+          fileName={getValues().title + ".pdf"}
         >
-          <Button>Download</Button>
-        </PDFDownloadLink> */}
-      </div>
+          <button className="mr-2 mt-2 rounded-full bg-[#0074d9] px-3 py-2 text-sm font-medium tracking-wider text-blue-100 shadow-sm hover:bg-[#7EA6F0] hover:shadow-2xl">
+            Download
+          </button>
+        </PDFDownloadLink>
+      )}
     </div>
   );
 }
