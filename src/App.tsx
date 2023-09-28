@@ -1,59 +1,22 @@
-import { useState } from "react";
-import DatePicker, { DateObject } from "react-multi-date-picker";
+import DatePicker from "react-multi-date-picker";
 import DatePanel from "react-multi-date-picker/plugins/date_panel";
-import { type Value } from "react-multi-date-picker";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import Invoice from "./components/document/Invoice";
-import { z } from "zod";
-import { createDateObjects } from "./utils/formatDate";
-import { Form, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 import FormInput from "./components/form/FormInput";
-
-// TODO Add Zod input validation
-
-export type FormData = {
-  title: string;
-  name: string;
-  date: Date;
-  address: string;
-  city: string;
-  phone: string;
-  rehearsalRate: number;
-  performanceRate: number;
-  rehearsalDates: Date[];
-  performanceDates: Date[];
-};
-
-const formSchema = z.object({
-  name: z.string().min(1),
-  date: z.date(),
-  address: z.string().min(1),
-  city: z.string().min(1),
-  phone: z.string().min(1),
-  rehearsalRate: z.number(),
-  performanceRate: z.number(),
-  rehearsalDates: z.date().array().nonempty(),
-  performanceDates: z.date().array().nonempty(),
-});
+import { formSchema, type FormData } from "./components/form/formSchema";
 
 export default function App() {
-  const [documentDate, setDocumentDate] = useState<Value>(new Date());
-  const [rehearsalDays, setRehearsalDays] = useState<Value>([]);
-  const [performanceDays, setPerformanceDays] = useState<Value>([]);
-  const { register, handleSubmit, setValue } = useForm<FormData>();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm<FormData>({ resolver: zodResolver(formSchema) });
 
   function onSubmit(data: FormData) {
-    if (!documentDate || !rehearsalDays || !performanceDays) {
-      return;
-    }
-    const { date, rehearsalDateArr, performanceDateArr } = createDateObjects(
-      documentDate,
-      rehearsalDays,
-      performanceDays
-    );
-    setValue("date", date, { shouldValidate: true });
-    setValue("rehearsalDates", rehearsalDateArr, { shouldValidate: true });
-    setValue("performanceDates", performanceDateArr, { shouldValidate: true });
+    console.log(errors);
     console.log(data);
   }
 
@@ -67,12 +30,14 @@ export default function App() {
             labelTitle="Document Title"
             data="title"
             register={register}
+            errors={errors}
           />
           <FormInput
             id="name"
             labelTitle="Name"
             data="name"
             register={register}
+            errors={errors}
           />
         </div>
         <div>
@@ -84,8 +49,13 @@ export default function App() {
           </label>
           <DatePicker
             id="documentDate"
-            value={documentDate}
-            onChange={setDocumentDate}
+            onChange={(dates) => {
+              if (dates) {
+                setValue("date", new Date(dates.toString()), {
+                  shouldValidate: true,
+                });
+              }
+            }}
             style={{
               minWidth: "50%",
               height: "1.75rem",
@@ -104,15 +74,11 @@ export default function App() {
           >
             <button
               className="bg-[#0074d9] mr-4 mb-1 px-3 py-2 text-sm shadow-sm font-medium tracking-wider text-blue-100 rounded-full hover:shadow-2xl hover:bg-[#7EA6F0]"
-              onClick={() => setDocumentDate(new DateObject())}
+              onClick={() => {
+                setValue("date", new Date());
+              }}
             >
               Today
-            </button>
-            <button
-              className="bg-[#0074d9] mr-2 px-3 py-2 text-sm shadow-sm font-medium tracking-wider text-blue-100 rounded-full hover:shadow-2xl hover:bg-[#7EA6F0]"
-              onClick={() => setDocumentDate(null)}
-            >
-              Reset
             </button>
           </DatePicker>
         </div>
@@ -121,18 +87,21 @@ export default function App() {
           labelTitle="Address"
           data="address"
           register={register}
+          errors={errors}
         />
         <FormInput
           id="city"
           labelTitle="City, State, Zip"
           data="city"
           register={register}
+          errors={errors}
         />
         <FormInput
           id="phone"
           labelTitle="Phone"
           data="phone"
           register={register}
+          errors={errors}
         />
         <h2 className="justify-self-center mt-3">Rates</h2>
         <div className="flex">
@@ -142,6 +111,7 @@ export default function App() {
             type="number"
             data="rehearsalRate"
             register={register}
+            errors={errors}
           />
           <FormInput
             id="performance-rate"
@@ -149,6 +119,7 @@ export default function App() {
             type="number"
             data="performanceRate"
             register={register}
+            errors={errors}
           />
         </div>
         <h2 className="mb-1 block text-base font-medium text-[#07074D]">
@@ -156,8 +127,20 @@ export default function App() {
         </h2>
         <DatePicker
           multiple
-          value={rehearsalDays}
-          onChange={setRehearsalDays}
+          onChange={(dates) => {
+            if (dates) {
+              setValue(
+                "rehearsalDates",
+                dates
+                  .toString()
+                  .split(",")
+                  .map((currentDate) => {
+                    return new Date(currentDate);
+                  }),
+                { shouldValidate: true }
+              );
+            }
+          }}
           plugins={[<DatePanel />]}
           format="MM/DD/YYYY"
           style={{
@@ -182,8 +165,20 @@ export default function App() {
         </h2>
         <DatePicker
           multiple
-          value={performanceDays}
-          onChange={setPerformanceDays}
+          onChange={(dates) => {
+            if (dates) {
+              setValue(
+                "performanceDates",
+                dates
+                  .toString()
+                  .split(",")
+                  .map((currentDate) => {
+                    return new Date(currentDate);
+                  }),
+                { shouldValidate: true }
+              );
+            }
+          }}
           plugins={[<DatePanel />]}
           format="MM/DD/YYYY"
           style={{

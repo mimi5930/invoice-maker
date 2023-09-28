@@ -1,4 +1,4 @@
-import { type Value } from "react-multi-date-picker";
+import type { Value } from "react-multi-date-picker";
 
 type VerifiedValue = NonNullable<Value>;
 

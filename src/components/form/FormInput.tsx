@@ -1,5 +1,5 @@
-import { type UseFormRegister } from "react-hook-form";
-import type { FormData } from "../../App";
+import { FieldErrors, type UseFormRegister } from "react-hook-form";
+import type { FormData } from "./formSchema";
 
 type InputProps = {
   id: string;
@@ -7,6 +7,7 @@ type InputProps = {
   data: keyof FormData;
   type?: React.HTMLInputTypeAttribute;
   register: UseFormRegister<FormData>;
+  errors: FieldErrors<FormData>;
 };
 
 export default function FormInput({
@@ -15,6 +16,7 @@ export default function FormInput({
   labelTitle,
   type = "text",
   register,
+  errors,
 }: InputProps) {
   return (
     <div>
@@ -30,6 +32,7 @@ export default function FormInput({
         type={type}
         {...register(data)}
       />
+      {errors[data] && <p className="text-red-600">{errors[data]?.message}</p>}
     </div>
   );
 }
