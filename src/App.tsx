@@ -90,7 +90,6 @@ export default function App() {
           data="address"
           register={register}
           errors={errors}
-          parentClassName="mb-1"
         />
         <FormInput
           id="city"
@@ -98,7 +97,6 @@ export default function App() {
           data="city"
           register={register}
           errors={errors}
-          parentClassName="mb-1"
         />
         <FormInput
           id="phone"
