@@ -20,12 +20,12 @@ export default function App() {
     <div className="h-screen bg-blue-400">
       <h1 className="pt-2 text-center text-2xl font-bold">Invoice Maker</h1>
       <form
-        className="m-5 mx-10"
+        className="m-5 mx-[15%] border border-solid border-black"
         onSubmit={handleSubmit((data) => {
           console.log("success!", data);
         })}
       >
-        <div className="mb-1 flex gap-1">
+        <div className="mb-1 flex justify-between gap-1">
           <FormInput
             id="title"
             labelTitle="Document Title"
@@ -210,11 +210,11 @@ export default function App() {
           document={<Invoice data={getValues()} />}
           fileName={getValues().title + ".pdf"}
         >
-          <button 
-                className="inline-block rounded bg-blue-400 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-blue-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-blue-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-blue-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-
-            {/* className="mr-2 mt-2 rounded-full bg-[#0074d9] px-3 py-2 text-sm font-medium tracking-wider text-blue-100 shadow-sm hover:bg-[#7EA6F0] hover:shadow-2xl"> */}
-            >Download
+          <button
+            className="inline-block rounded bg-blue-400 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-blue-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-blue-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-blue-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+            /* className="mr-2 mt-2 rounded-full bg-[#0074d9] px-3 py-2 text-sm font-medium tracking-wider text-blue-100 shadow-sm hover:bg-[#7EA6F0] hover:shadow-2xl"> */
+          >
+            Download
           </button>
         </PDFDownloadLink>
       )}
