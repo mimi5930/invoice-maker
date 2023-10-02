@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import FormInput from "./components/form/FormInput";
 import { formSchema, type FormData } from "./components/form/formSchema";
+import "./app.css";
 
 export default function App() {
   const {
@@ -17,12 +18,12 @@ export default function App() {
   } = useForm<FormData>({ resolver: zodResolver(formSchema) });
 
   return (
-    <div className="h-screen bg-blue-400">
+    <body className="h-full bg-gradient-to-b from-blue-300 via-green-200 to-yellow-300">
       <h1 className="pt-2 text-center text-2xl font-bold">Invoice Maker</h1>
       <form
-        className="m-5 mx-[15%] border border-solid border-black"
+        className="mx-[15%] mt-5 rounded bg-slate-100 p-3 shadow-lg "
         onSubmit={handleSubmit((data) => {
-          console.log("success!", data);
+          console.log(data);
         })}
       >
         <div className="mb-1 flex justify-between gap-1">
@@ -41,7 +42,7 @@ export default function App() {
             errors={errors}
           />
         </div>
-        <div>
+        <div className="w-1/2">
           <label
             htmlFor="documentDate"
             className="mb-1 block text-base font-medium text-[#07074D]"
@@ -58,7 +59,7 @@ export default function App() {
               }
             }}
             style={{
-              minWidth: "50%",
+              width: "100%",
               height: "1.75rem",
               borderRadius: "0.375rem",
               borderWidth: "1px",
@@ -89,6 +90,7 @@ export default function App() {
           data="address"
           register={register}
           errors={errors}
+          parentClassName="mb-1"
         />
         <FormInput
           id="city"
@@ -96,6 +98,7 @@ export default function App() {
           data="city"
           register={register}
           errors={errors}
+          parentClassName="mb-1"
         />
         <FormInput
           id="phone"
@@ -104,8 +107,8 @@ export default function App() {
           register={register}
           errors={errors}
         />
-        <h2 className="mt-3 justify-self-center">Rates</h2>
-        <div className="flex">
+        <h2 className="my-3 text-base font-medium text-[#07074D]">Rates:</h2>
+        <div className="mb-1 flex justify-between gap-1">
           <FormInput
             id="rehearsal-rate"
             labelTitle="Rehearsals"
@@ -145,7 +148,7 @@ export default function App() {
           plugins={[<DatePanel />]}
           format="MM/DD/YYYY"
           style={{
-            width: "50%",
+            width: "100%",
             height: "1.75rem",
             borderRadius: "0.375rem",
             borderWidth: "1px",
@@ -182,7 +185,7 @@ export default function App() {
           plugins={[<DatePanel />]}
           format="MM/DD/YYYY"
           style={{
-            width: "50vw",
+            width: "100%",
             height: "1.75rem",
             borderRadius: "0.375rem",
             borderWidth: "1px",
@@ -198,26 +201,25 @@ export default function App() {
           }}
         ></DatePicker>
         <button
-          className="mr-2 rounded-full bg-[#0074d9] px-3 py-2 text-sm font-medium tracking-wider text-blue-100 shadow-sm hover:bg-[#7EA6F0] hover:shadow-2xl"
           type="submit"
-          disabled={!isValid}
+          className="inline-block rounded bg-blue-400 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-blue-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-blue-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-blue-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
         >
           Validate
         </button>
-      </form>
-      {isValid && (
-        <PDFDownloadLink
-          document={<Invoice data={getValues()} />}
-          fileName={getValues().title + ".pdf"}
-        >
-          <button
-            className="inline-block rounded bg-blue-400 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-blue-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-blue-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-blue-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-            /* className="mr-2 mt-2 rounded-full bg-[#0074d9] px-3 py-2 text-sm font-medium tracking-wider text-blue-100 shadow-sm hover:bg-[#7EA6F0] hover:shadow-2xl"> */
+        {isValid && (
+          <PDFDownloadLink
+            document={<Invoice data={getValues()} />}
+            fileName={getValues().title + ".pdf"}
           >
-            Download
-          </button>
-        </PDFDownloadLink>
-      )}
-    </div>
+            <button
+              type="button"
+              className="ml-3 inline-block rounded bg-blue-400 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-blue-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-blue-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-blue-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+            >
+              Download
+            </button>
+          </PDFDownloadLink>
+        )}
+      </form>
+    </body>
   );
 }
