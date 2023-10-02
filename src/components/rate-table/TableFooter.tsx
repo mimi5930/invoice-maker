@@ -51,7 +51,7 @@ export default function TableFooter(data: DataProps) {
           fontWeight: "bold",
         }}
       >
-        {total}
+        {"$" + total.toLocaleString()}
       </Text>
     </View>
   );

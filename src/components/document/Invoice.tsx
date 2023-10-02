@@ -2,6 +2,7 @@ import { Document, Page, View, Text } from "@react-pdf/renderer";
 import RateTable from "../rate-table/RateTable";
 import DetailsTable from "../details-table/DetailsTable";
 import { formatDate } from "../../utils/formatDate";
+import { formatPhoneNumber } from "../../utils/formatPhone";
 
 type Data = {
   name: string;
@@ -47,7 +48,7 @@ export default function Invoice({ data }: InvoiceProps) {
           <View id="contact-info">
             <Text>{address}</Text>
             <Text>{city}</Text>
-            <Text>{phone}</Text>
+            <Text>{formatPhoneNumber(phone)}</Text>
           </View>
           <RateTable
             rehearsalRate={rehearsalRate}

@@ -51,7 +51,7 @@ export default function TableBody({
           padding: "2px",
         }}
       >
-        {unitPrice}
+        {"$" + unitPrice.toLocaleString()}
       </Text>
       <Text
         style={{
@@ -60,7 +60,7 @@ export default function TableBody({
           padding: "2px",
         }}
       >
-        {amount}
+        {"$" + amount.toLocaleString()}
       </Text>
     </View>
   );
