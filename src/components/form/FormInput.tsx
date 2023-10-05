@@ -21,7 +21,7 @@ export default function FormInput({
   return (
     <div className="w-full">
       <label
-        className="mb-1 block text-base font-medium text-[#07074D]"
+        className="mb-1 block text-base font-medium text-[#07074D] dark:text-slate-200"
         htmlFor={id}
       >
         {labelTitle}
@@ -32,7 +32,7 @@ export default function FormInput({
         type={type}
         {...register(data)}
       />
-      {errors[data] && <p className="text-red-600">{errors[data]?.message}</p>}
+      {errors[data] && <p className="text-red-600 ">{errors[data]?.message}</p>}
     </div>
   );
 }

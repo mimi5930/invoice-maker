@@ -18,10 +18,12 @@ export default function App() {
   } = useForm<FormData>({ resolver: zodResolver(formSchema) });
 
   return (
-    <body className="h-full bg-gradient-to-b from-blue-300 via-green-200 to-yellow-300">
-      <h1 className="pt-2 text-center text-2xl font-bold">Invoice Maker</h1>
+    <body className="min-h-screen bg-gradient-to-b from-blue-300 via-green-200 to-yellow-300 dark:bg-gradient-to-b dark:from-gray-700 dark:via-gray-900 dark:to-black ">
+      <h1 className="py-10 text-center text-5xl font-bold dark:text-slate-200">
+        Invoice Maker
+      </h1>
       <form
-        className="mx-[15%] mt-5 rounded bg-slate-100 p-3 shadow-lg "
+        className="mx-[15%] mt-5 rounded bg-slate-100 p-3 shadow-lg dark:bg-gray-500 "
         onSubmit={handleSubmit((data) => {
           console.log(data);
         })}
@@ -45,7 +47,7 @@ export default function App() {
         <div className="w-1/2">
           <label
             htmlFor="documentDate"
-            className="mb-1 block text-base font-medium text-[#07074D]"
+            className="mb-1 block text-base font-medium text-[#07074D] dark:text-slate-200"
           >
             Date
           </label>
@@ -83,6 +85,9 @@ export default function App() {
               Today
             </button>
           </DatePicker>
+          {errors.date && (
+            <p className="text-red-600">{errors.date?.message}</p>
+          )}
         </div>
         <FormInput
           id="address"
@@ -105,7 +110,9 @@ export default function App() {
           register={register}
           errors={errors}
         />
-        <h2 className="my-3 text-base font-medium text-[#07074D]">Rates:</h2>
+        <h2 className="my-3 text-base font-medium text-[#07074D] dark:text-slate-200">
+          Rates:
+        </h2>
         <div className="mb-1 flex justify-between gap-1">
           <FormInput
             id="rehearsal-rate"
@@ -124,7 +131,7 @@ export default function App() {
             errors={errors}
           />
         </div>
-        <h2 className="mb-1 block text-base font-medium text-[#07074D]">
+        <h2 className="mb-1 block text-base font-medium text-[#07074D] dark:text-slate-200">
           Rehearsal Dates
         </h2>
         <DatePicker
@@ -161,7 +168,10 @@ export default function App() {
             marginBottom: ".5rem",
           }}
         ></DatePicker>
-        <h2 className="mb-1 block text-base font-medium text-[#07074D]">
+        {errors.rehearsalDates && (
+          <p className="text-red-600">{errors.rehearsalDates?.message}</p>
+        )}
+        <h2 className="mb-1 block text-base font-medium text-[#07074D] dark:text-slate-200">
           Performance Dates
         </h2>
         <DatePicker
@@ -198,6 +208,9 @@ export default function App() {
             marginBottom: ".5rem",
           }}
         ></DatePicker>
+        {errors.performanceDates && (
+          <p className="text-red-600">{errors.performanceDates?.message}</p>
+        )}
         <button
           type="submit"
           className="inline-block rounded bg-blue-400 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-blue-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-blue-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-blue-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
