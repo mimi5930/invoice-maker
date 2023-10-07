@@ -14,7 +14,7 @@ export function formatDate(date: Date) {
 export function createDateObjects(
   dateDateObject: VerifiedValue,
   rehearsalDateObject: VerifiedValue,
-  performanceDateObject: VerifiedValue
+  performanceDateObject: VerifiedValue,
 ) {
   const date = new Date(dateDateObject.toString());
   const rehearsalDateArr = rehearsalDateObject
