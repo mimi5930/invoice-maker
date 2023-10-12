@@ -14,12 +14,12 @@ export default function TableBody({ dates, header }: TableBodyProps) {
       style={{
         display: "flex",
         flexDirection: "column",
-        width: "100%",
+        width: "45%",
+        marginBottom: "24px",
       }}
     >
       <Text
         style={{
-          width: "90%",
           textAlign: "center",
           border: "1px solid black",
           padding: "2px",
@@ -32,7 +32,6 @@ export default function TableBody({ dates, header }: TableBodyProps) {
           <Text
             key={index}
             style={{
-              width: "90%",
               borderRight: "1px solid black",
               borderBottom: "1px solid black",
               borderLeft: "1px solid black",

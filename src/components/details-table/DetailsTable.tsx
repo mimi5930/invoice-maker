@@ -13,29 +13,26 @@ export default function DetailsTable({
   extraFields,
 }: DetailsTableProps) {
   return (
-    <>
-      <View
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          width: "100%",
-          marginBottom: "12px",
-        }}
-      >
-        <TableBody dates={rehearsalDates} header="Rehearsals" />
-        <TableBody dates={performanceDates} header="Performances" />
-      </View>
+    <View
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        flexWrap: "wrap",
+        width: "100%",
+      }}
+    >
+      <TableBody dates={rehearsalDates} header="Rehearsals" />
+      <TableBody dates={performanceDates} header="Performances" />
       {extraFields &&
-        extraFields.map((field, index) => {
+        extraFields.map((field) => {
           return (
-            <View style={{ marginBottom: "12px", width: "50%" }} key={index}>
-              <TableBody
-                dates={field.dates}
-                header={field.description}
-              ></TableBody>
-            </View>
+            <TableBody
+              dates={field.dates}
+              header={field.description}
+            ></TableBody>
           );
         })}
-    </>
+    </View>
   );
 }
