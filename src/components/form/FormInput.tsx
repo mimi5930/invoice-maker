@@ -1,6 +1,5 @@
 import { FieldErrors, type UseFormRegister } from "react-hook-form";
 import type { FormData } from "./formSchema";
-import { twMerge } from "tailwind-merge";
 
 type InputProps = {
   id: string;
@@ -9,9 +8,6 @@ type InputProps = {
   type?: React.HTMLInputTypeAttribute;
   register: UseFormRegister<FormData>;
   errors: FieldErrors<FormData>;
-  labelClassName?: string;
-  inputClassName?: string;
-  parentClassName?: string;
 };
 
 export default function FormInput({
@@ -21,31 +17,22 @@ export default function FormInput({
   type = "text",
   register,
   errors,
-  labelClassName,
-  inputClassName,
-  parentClassName,
 }: InputProps) {
   return (
-    <div className={twMerge(parentClassName, "w-full")}>
+    <div className="w-full">
       <label
-        className={twMerge(
-          "mb-1 block text-base font-medium text-[#07074D]",
-          labelClassName,
-        )}
+        className="mb-1 block text-base font-medium text-[#07074D] dark:text-slate-200"
         htmlFor={id}
       >
         {labelTitle}
       </label>
       <input
-        className={twMerge(
-          "h-7 w-full rounded-md border border-[#e0e0e0] bg-white py-3 pl-2 text-base outline-none focus:border-[#6A64F1] focus:shadow-xl",
-          inputClassName,
-        )}
+        className="h-7 w-full rounded-md border border-[#e0e0e0] bg-white py-3 pl-2 text-base outline-none focus:border-[#6A64F1] focus:shadow-xl"
         id={id}
         type={type}
         {...register(data)}
       />
-      {errors[data] && <p className="text-red-600">{errors[data]?.message}</p>}
+      {errors[data] && <p className="text-red-600 ">{errors[data]?.message}</p>}
     </div>
   );
 }

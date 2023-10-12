@@ -7,6 +7,9 @@ type TableBodyProps = {
 };
 
 export default function TableBody({ dates, header, width }: TableBodyProps) {
+  // sort dates
+  const sortedDates = dates.sort((a, b) => a.getTime() - b.getTime());
+
   return (
     <View
       style={{
@@ -25,7 +28,7 @@ export default function TableBody({ dates, header, width }: TableBodyProps) {
       >
         {header}
       </Text>
-      {dates.map((date, index) => {
+      {sortedDates.map((date, index) => {
         return (
           <Text
             key={index}
