@@ -2,19 +2,30 @@ import { View } from "@react-pdf/renderer";
 import TableHeader from "./TableHeader";
 import TableBody from "./TableBody";
 import TableFooter from "./TableFooter";
+import type { FormData } from "../form/formSchema";
 
-type RateTableProps = {
-  rehearsalRate: number;
-  performanceRate: number;
-  rehearsalDates: Date[];
-  performanceDates: Date[];
-};
+// type RateTableProps = {
+//   rehearsalRate: number;
+//   performanceRate: number;
+//   rehearsalDates: Date[];
+//   performanceDates: Date[];
+// };
+
+type RateTableProps = Pick<
+  FormData,
+  | "rehearsalRate"
+  | "performanceRate"
+  | "rehearsalDates"
+  | "performanceDates"
+  | "extraFields"
+>;
 
 export default function RateTable({
   rehearsalDates,
   rehearsalRate,
   performanceDates,
   performanceRate,
+  extraFields,
 }: RateTableProps) {
   return (
     <View>
@@ -29,6 +40,17 @@ export default function RateTable({
         description="Performances"
         unitPrice={performanceRate}
       />
+      {extraFields &&
+        extraFields.map((field, index) => {
+          return (
+            <TableBody
+              key={index}
+              quantity={field.dates.length}
+              description={field.description}
+              unitPrice={field.rate}
+            ></TableBody>
+          );
+        })}
       <TableFooter
         rehearsalDates={rehearsalDates}
         rehearsalRate={rehearsalRate}

@@ -1,5 +1,18 @@
 import { z } from "zod";
 
+const extraFields = z.object({
+  description: z.string().min(1, "Please enter a description"),
+  dates: z
+    .date({
+      required_error: "Please select a date",
+      invalid_type_error: "Please enter valid date(s)",
+    })
+    .array(),
+  rate: z.coerce
+    .number({ invalid_type_error: "Please enter a number" })
+    .nonnegative({ message: "Must be a positive value" }),
+});
+
 export const formSchema = z.object({
   title: z.string().min(1, "Please enter a title"),
   name: z.string().min(1, "Please enter a name"),
@@ -14,7 +27,7 @@ export const formSchema = z.object({
     .min(1, "Please enter a phone number")
     .regex(
       /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/,
-      "Please enter a valid phone number"
+      "Please enter a valid phone number",
     ),
   rehearsalRate: z.coerce
     .number({ invalid_type_error: "Please enter a number" })
@@ -34,6 +47,7 @@ export const formSchema = z.object({
       invalid_type_error: "Please enter valid date(s)",
     })
     .array(),
+  extraFields: extraFields.array().optional(),
 });
 
 export type FormData = z.infer<typeof formSchema>;

@@ -20,7 +20,9 @@ export default function Invoice({ data }: InvoiceProps) {
     performanceRate,
     rehearsalDates,
     performanceDates,
+    extraFields,
   } = data;
+
   return (
     <Document>
       <Page style={{ fontFamily: "Times-Roman", fontSize: "12px" }}>
@@ -44,6 +46,7 @@ export default function Invoice({ data }: InvoiceProps) {
             rehearsalDates={rehearsalDates}
             performanceDates={performanceDates}
             performanceRate={performanceRate}
+            extraFields={extraFields}
           />
           <View>
             <Text style={{ fontFamily: "Times-Bold" }}>Details:</Text>
