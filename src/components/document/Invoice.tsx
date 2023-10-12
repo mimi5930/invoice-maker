@@ -51,10 +51,10 @@ export default function Invoice({ data }: InvoiceProps) {
           <View>
             <Text style={{ fontFamily: "Times-Bold" }}>Details:</Text>
           </View>
-
           <DetailsTable
             rehearsalDates={rehearsalDates}
             performanceDates={performanceDates}
+            extraFields={extraFields}
           ></DetailsTable>
         </View>
       </Page>

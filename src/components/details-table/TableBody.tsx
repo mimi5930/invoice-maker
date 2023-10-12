@@ -3,10 +3,9 @@ import { View, Text } from "@react-pdf/renderer";
 type TableBodyProps = {
   dates: Date[];
   header: string;
-  width: string;
 };
 
-export default function TableBody({ dates, header, width }: TableBodyProps) {
+export default function TableBody({ dates, header }: TableBodyProps) {
   // sort dates
   const sortedDates = dates.sort((a, b) => a.getTime() - b.getTime());
 
@@ -20,7 +19,7 @@ export default function TableBody({ dates, header, width }: TableBodyProps) {
     >
       <Text
         style={{
-          width: width,
+          width: "90%",
           textAlign: "center",
           border: "1px solid black",
           padding: "2px",
@@ -33,7 +32,7 @@ export default function TableBody({ dates, header, width }: TableBodyProps) {
           <Text
             key={index}
             style={{
-              width: width,
+              width: "90%",
               borderRight: "1px solid black",
               borderBottom: "1px solid black",
               borderLeft: "1px solid black",
