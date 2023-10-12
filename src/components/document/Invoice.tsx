@@ -3,21 +3,10 @@ import RateTable from "../rate-table/RateTable";
 import DetailsTable from "../details-table/DetailsTable";
 import { formatDate } from "../../utils/formatDate";
 import { formatPhoneNumber } from "../../utils/formatPhone";
-
-type Data = {
-  name: string;
-  date: Date;
-  address: string;
-  city: string;
-  phone: string;
-  rehearsalRate: number;
-  performanceRate: number;
-  rehearsalDates: Date[];
-  performanceDates: Date[];
-};
+import type { FormData } from "../form/formSchema";
 
 type InvoiceProps = {
-  data: Data;
+  data: FormData;
 };
 
 export default function Invoice({ data }: InvoiceProps) {

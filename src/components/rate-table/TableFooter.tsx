@@ -1,12 +1,12 @@
 import { View, Text } from "@react-pdf/renderer";
+import { FormData } from "../form/formSchema";
 
-type DataProps = {
-  rehearsalRate: number;
-  performanceRate: number;
-  rehearsalDates: Date[];
-  performanceDates: Date[];
-};
-export default function TableFooter(data: DataProps) {
+export default function TableFooter(
+  data: Pick<
+    FormData,
+    "performanceDates" | "rehearsalDates" | "rehearsalRate" | "performanceRate"
+  >,
+) {
   const total =
     data.rehearsalRate * data.rehearsalDates.length +
     data.performanceRate * data.performanceDates.length;
