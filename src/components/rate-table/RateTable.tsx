@@ -4,13 +4,6 @@ import TableBody from "./TableBody";
 import TableFooter from "./TableFooter";
 import type { FormData } from "../form/formSchema";
 
-// type RateTableProps = {
-//   rehearsalRate: number;
-//   performanceRate: number;
-//   rehearsalDates: Date[];
-//   performanceDates: Date[];
-// };
-
 type RateTableProps = Pick<
   FormData,
   | "rehearsalRate"
