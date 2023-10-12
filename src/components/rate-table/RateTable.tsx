@@ -49,6 +49,7 @@ export default function RateTable({
         rehearsalRate={rehearsalRate}
         performanceDates={performanceDates}
         performanceRate={performanceRate}
+        extraFields={extraFields}
       />
     </View>
   );

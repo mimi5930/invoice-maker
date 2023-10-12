@@ -1,15 +1,30 @@
 import { View, Text } from "@react-pdf/renderer";
 import { FormData } from "../form/formSchema";
 
-export default function TableFooter(
-  data: Pick<
-    FormData,
-    "performanceDates" | "rehearsalDates" | "rehearsalRate" | "performanceRate"
-  >,
-) {
-  const total =
-    data.rehearsalRate * data.rehearsalDates.length +
-    data.performanceRate * data.performanceDates.length;
+export default function TableFooter({
+  rehearsalRate,
+  rehearsalDates,
+  performanceRate,
+  performanceDates,
+  extraFields,
+}: Pick<
+  FormData,
+  | "performanceDates"
+  | "rehearsalDates"
+  | "rehearsalRate"
+  | "performanceRate"
+  | "extraFields"
+>) {
+  const sumExtraFields = extraFields?.reduce((acc, obj) => {
+    return acc + obj.rate * obj.dates.length;
+  }, 0);
+
+  const total = sumExtraFields
+    ? rehearsalRate * rehearsalDates.length +
+      performanceRate * performanceDates.length +
+      sumExtraFields
+    : rehearsalRate * rehearsalDates.length +
+      performanceRate * performanceDates.length;
 
   return (
     <View
