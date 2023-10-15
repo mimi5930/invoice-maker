@@ -7,13 +7,6 @@ import DatePanel from "react-multi-date-picker/plugins/date_panel";
 import Invoice from "../document/Invoice";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { Down, Up } from "../svg/svg";
-import { useState } from "react";
-
-type ServiceArray = {
-  description: string;
-  dates: Date[];
-  rate: number;
-};
 
 const datePickerStyles: React.CSSProperties = {
   width: "100%",
@@ -41,11 +34,9 @@ export default function Form() {
   } = useForm<FormData>({ resolver: zodResolver(formSchema) });
 
   const { fields, append, remove } = useFieldArray({
-    control, // control props comes from useForm (optional: if you are using FormContext)
-    name: "extraFields", // unique name for your Field Array
+    control,
+    name: "extraFields",
   });
-
-  const [serviceArray, setServiceArray] = useState<ServiceArray[]>([]);
 
   return (
     <form
