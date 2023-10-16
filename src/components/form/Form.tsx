@@ -6,7 +6,7 @@ import DatePicker from "react-multi-date-picker";
 import DatePanel from "react-multi-date-picker/plugins/date_panel";
 import Invoice from "../document/Invoice";
 import { PDFDownloadLink } from "@react-pdf/renderer";
-import { Down, Up } from "../svg/svg";
+import { Down, Up } from "../svg";
 
 const datePickerStyles: React.CSSProperties = {
   width: "100%",
@@ -24,6 +24,7 @@ const datePickerStyles: React.CSSProperties = {
 };
 
 export default function Form() {
+  // react-hook-form hook
   const {
     register,
     control,
@@ -33,14 +34,16 @@ export default function Form() {
     getValues,
   } = useForm<FormData>({ resolver: zodResolver(formSchema) });
 
+  // field array hook
   const { fields, append, remove } = useFieldArray({
     control,
     name: "extraFields",
   });
 
+  // form component
   return (
     <form
-      className="mx-[15%] mt-5 rounded bg-slate-100 p-3 shadow-lg dark:bg-gray-500 "
+      className="mx-[15%] mt-5 rounded bg-stone-400 p-3 shadow-lg dark:bg-gray-500 "
       onSubmit={handleSubmit((data) => {
         console.log(data);
       })}
@@ -89,7 +92,7 @@ export default function Form() {
         register={register}
         errors={errors}
       />
-      <div className="flex gap-3 my-1">
+      <div className="my-1 flex gap-3">
         <FormInput
           id="city"
           labelTitle="City"
