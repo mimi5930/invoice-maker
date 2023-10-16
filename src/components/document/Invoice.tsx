@@ -15,6 +15,8 @@ export default function Invoice({ data }: InvoiceProps) {
     date,
     address,
     city,
+    state,
+    zip,
     phone,
     rehearsalRate,
     performanceRate,
@@ -38,7 +40,7 @@ export default function Invoice({ data }: InvoiceProps) {
           {/* Contact info */}
           <View id="contact-info">
             <Text>{address}</Text>
-            <Text>{city}</Text>
+            <Text>{`${city}, ${state}, ${zip}`}</Text>
             <Text>{formatPhoneNumber(phone)}</Text>
           </View>
           <RateTable

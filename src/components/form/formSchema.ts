@@ -22,6 +22,8 @@ export const formSchema = z.object({
   }),
   address: z.string().min(1, "Please enter an address"),
   city: z.string().min(1, "Please enter a city"),
+  state: z.string().min(1, "Please enter a state"),
+  zip: z.string().min(1, "Please enter a zip code"),
   phone: z
     .string()
     .min(1, "Please enter a phone number")

@@ -89,13 +89,29 @@ export default function Form() {
         register={register}
         errors={errors}
       />
-      <FormInput
-        id="city"
-        labelTitle="City, State, Zip"
-        data="city"
-        register={register}
-        errors={errors}
-      />
+      <div className="flex gap-3 my-1">
+        <FormInput
+          id="city"
+          labelTitle="City"
+          data="city"
+          register={register}
+          errors={errors}
+        />
+        <FormInput
+          id="state"
+          labelTitle="State"
+          data="state"
+          register={register}
+          errors={errors}
+        />
+        <FormInput
+          id="zip"
+          labelTitle="Zip"
+          data="zip"
+          register={register}
+          errors={errors}
+        />
+      </div>
       <FormInput
         id="phone"
         labelTitle="Phone"
@@ -103,10 +119,10 @@ export default function Form() {
         register={register}
         errors={errors}
       />
-      <h2 className="my-3 text-base font-medium text-[#07074D] dark:text-slate-200">
+      <h2 className="my-3 text-base font-bold text-[#07074D] dark:text-slate-200">
         Rates:
       </h2>
-      <div className="mb-1 flex justify-between gap-1">
+      <div className="mb-1 flex justify-between gap-3">
         <FormInput
           id="rehearsal-rate"
           labelTitle="Rehearsals"
