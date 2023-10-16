@@ -32,11 +32,28 @@ export const formSchema = z.object({
       "Please enter a valid phone number",
     ),
   rehearsalRate: z.coerce
-    .number({ invalid_type_error: "Please enter a number" })
-    .nonnegative({ message: "Must be a positive value" }),
+    .number({
+      required_error: "Please enter a rate",
+      invalid_type_error: "Please enter a number",
+    })
+    .nonnegative({ message: "Must be a positive value" })
+    .refine(
+      (arg) => {
+        arg === null;
+      },
+      { message: "Please enter a rate" },
+    ),
   performanceRate: z.coerce
-    .number({ invalid_type_error: "Please enter a number" })
-    .nonnegative({ message: "Must be a positive value" }),
+    .number({
+      invalid_type_error: "Please enter a number",
+    })
+    .nonnegative({ message: "Must be a positive value" })
+    .refine(
+      (arg) => {
+        arg === null;
+      },
+      { message: "Please enter a rate" },
+    ),
   rehearsalDates: z
     .date({
       required_error: "Please select a date",
