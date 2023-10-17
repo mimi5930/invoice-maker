@@ -48,7 +48,7 @@ export default function Form() {
         console.log(data);
       })}
     >
-      <div className="mb-1 flex justify-between gap-1">
+      <div className="mb-1 flex justify-between gap-3">
         <FormInput
           id="title"
           labelTitle="Document Title"
