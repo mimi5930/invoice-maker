@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 const extraFields = z.object({
-  description: z.string().min(1, "Please enter a description"),
+  description: z.string().nonempty("Please enter a description"),
   dates: z
     .date({
       required_error: "Please select a date",
@@ -14,19 +14,19 @@ const extraFields = z.object({
 });
 
 export const formSchema = z.object({
-  title: z.string().min(1, "Please enter a title"),
-  name: z.string().min(1, "Please enter a name"),
+  title: z.string().nonempty("Please enter a title"),
+  name: z.string().nonempty("Please enter a name"),
   date: z.date({
     required_error: "Select a date",
     invalid_type_error: "Please enter a valid date",
   }),
-  address: z.string().min(1, "Please enter an address"),
-  city: z.string().min(1, "Please enter a city"),
-  state: z.string().min(1, "Please enter a state"),
-  zip: z.string().min(1, "Please enter a zip code"),
+  address: z.string().nonempty("Please enter an address"),
+  city: z.string().nonempty("Please enter a city"),
+  state: z.string().nonempty("Please enter a state"),
+  zip: z.string().nonempty("Please enter a zip code"),
   phone: z
     .string()
-    .min(1, "Please enter a phone number")
+    .nonempty("Please enter a phone number")
     .regex(
       /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/,
       "Please enter a valid phone number",
@@ -36,24 +36,12 @@ export const formSchema = z.object({
       required_error: "Please enter a rate",
       invalid_type_error: "Please enter a number",
     })
-    .nonnegative({ message: "Must be a positive value" })
-    .refine(
-      (arg) => {
-        arg === null;
-      },
-      { message: "Please enter a rate" },
-    ),
+    .nonnegative({ message: "Must be a positive value" }),
   performanceRate: z.coerce
     .number({
       invalid_type_error: "Please enter a number",
     })
-    .nonnegative({ message: "Must be a positive value" })
-    .refine(
-      (arg) => {
-        arg === null;
-      },
-      { message: "Please enter a rate" },
-    ),
+    .nonnegative({ message: "Must be a positive value" }),
   rehearsalDates: z
     .date({
       required_error: "Please select a date",
