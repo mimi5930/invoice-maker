@@ -20,7 +20,6 @@ const datePickerStyles: React.CSSProperties = {
   fontSize: "1rem",
   lineHeight: "1.5rem",
   outline: "none",
-  marginBottom: ".5rem",
 };
 
 export default function Form() {
@@ -216,14 +215,11 @@ export default function Form() {
                 id="description"
                 {...register(`extraFields.${index}.description`)}
               />
-              {/* {errors[`extraFields.${index}.description`] && (
-                  <p className="text-red-600 ">
-                    {
-                      errors[`extraFields.${serviceFieldIndex}.description`]
-                        ?.message
-                    }
-                  </p>
-                )} */}
+              {errors?.extraFields?.[index]?.description && (
+                <p className="text-red-600 ">
+                  {errors?.extraFields?.[index]?.description?.message}
+                </p>
+              )}
             </div>
             <h2 className="my-1 block text-base font-medium text-[#07074D] dark:text-slate-200">
               Service Dates
@@ -248,6 +244,11 @@ export default function Form() {
               format="MM/DD/YYYY"
               style={datePickerStyles}
             ></DatePicker>
+            {errors?.extraFields?.[index]?.dates && (
+              <p className="text-red-600 ">
+                {errors?.extraFields?.[index]?.dates?.message}
+              </p>
+            )}
             <div className="w-full">
               <label
                 className="mb-1 block text-base font-medium text-[#07074D] dark:text-slate-200"
@@ -261,12 +262,11 @@ export default function Form() {
                 type="number"
                 {...register(`extraFields.${index}.rate`)}
               />
-
-              {/* {errors.extraFields[index]?.rate && (
-                  <p className="text-red-600 ">
-                    {errors.extraFields?[index]?.rate?.message}
-                  </p>
-                )} */}
+              {errors?.extraFields?.[index]?.rate && (
+                <p className="text-red-600 ">
+                  {errors?.extraFields?.[index]?.rate?.message}
+                </p>
+              )}
             </div>
             <button
               className="mb-2 flex align-middle text-xs hover:font-semibold dark:text-slate-200"
