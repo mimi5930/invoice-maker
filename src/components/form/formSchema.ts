@@ -10,7 +10,8 @@ const extraFields = z.object({
     .array(),
   rate: z.coerce
     .number({ invalid_type_error: "Please enter a number" })
-    .nonnegative({ message: "Must be a positive value" }),
+    .nonnegative({ message: "Must be a positive value" })
+    .gte(0.01, "Please enter a rate"),
 });
 
 export const formSchema = z.object({
@@ -36,12 +37,14 @@ export const formSchema = z.object({
       required_error: "Please enter a rate",
       invalid_type_error: "Please enter a number",
     })
-    .nonnegative({ message: "Must be a positive value" }),
+    .nonnegative({ message: "Must be a positive value" })
+    .gte(0.01, "Please enter a rate"),
   performanceRate: z.coerce
     .number({
       invalid_type_error: "Please enter a number",
     })
-    .nonnegative({ message: "Must be a positive value" }),
+    .nonnegative({ message: "Must be a positive value" })
+    .gte(0.01, "Please enter a rate"),
   rehearsalDates: z
     .date({
       required_error: "Please select a date",
