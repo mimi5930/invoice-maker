@@ -7,6 +7,7 @@ import DatePanel from "react-multi-date-picker/plugins/date_panel";
 import Invoice from "../document/Invoice";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { Down, Up } from "../svg";
+import DateErrorMessage from "./DateErrorMessage";
 
 const datePickerStyles: React.CSSProperties = {
   width: "100%",
@@ -20,6 +21,7 @@ const datePickerStyles: React.CSSProperties = {
   fontSize: "1rem",
   lineHeight: "1.5rem",
   outline: "none",
+  marginBottom: ".5rem",
 };
 
 export default function Form() {
@@ -42,7 +44,7 @@ export default function Form() {
   // form component
   return (
     <form
-      className="mx-[15%] mt-5 rounded bg-stone-400 p-3 shadow-lg dark:bg-gray-500 "
+      className="mx-[15%] mt-5 rounded bg-white p-3 shadow-lg dark:bg-gray-500 "
       onSubmit={handleSubmit((data) => {
         console.log(data);
       })}
@@ -82,7 +84,7 @@ export default function Form() {
           style={datePickerStyles}
           format="MM/DD/YYYY"
         ></DatePicker>
-        {errors.date && <p className="text-red-600">{errors.date?.message}</p>}
+        {errors.date && <DateErrorMessage message={errors.date?.message} />}
       </div>
       <FormInput
         id="address"
@@ -166,7 +168,7 @@ export default function Form() {
         style={datePickerStyles}
       ></DatePicker>
       {errors.rehearsalDates && (
-        <p className="text-red-600">{errors.rehearsalDates?.message}</p>
+        <DateErrorMessage message={errors.rehearsalDates?.message} />
       )}
       <h2 className="mb-1 block text-base font-medium text-[#07074D] dark:text-slate-200">
         Performance Dates
@@ -192,7 +194,7 @@ export default function Form() {
         style={datePickerStyles}
       ></DatePicker>
       {errors.performanceDates && (
-        <p className="text-red-600">{errors.performanceDates?.message}</p>
+        <p className="-mt-2 text-red-600">{errors.performanceDates?.message}</p>
       )}
       {fields.map((field, index) => {
         return (
@@ -216,9 +218,9 @@ export default function Form() {
                 {...register(`extraFields.${index}.description`)}
               />
               {errors?.extraFields?.[index]?.description && (
-                <p className="text-red-600 ">
-                  {errors?.extraFields?.[index]?.description?.message}
-                </p>
+                <DateErrorMessage
+                  message={errors?.extraFields?.[index]?.description?.message}
+                />
               )}
             </div>
             <h2 className="my-1 block text-base font-medium text-[#07074D] dark:text-slate-200">
@@ -245,9 +247,9 @@ export default function Form() {
               style={datePickerStyles}
             ></DatePicker>
             {errors?.extraFields?.[index]?.dates && (
-              <p className="text-red-600 ">
-                {errors?.extraFields?.[index]?.dates?.message}
-              </p>
+              <DateErrorMessage
+                message={errors?.extraFields?.[index]?.dates?.message}
+              />
             )}
             <div className="w-full">
               <label
@@ -263,9 +265,9 @@ export default function Form() {
                 {...register(`extraFields.${index}.rate`)}
               />
               {errors?.extraFields?.[index]?.rate && (
-                <p className="text-red-600 ">
-                  {errors?.extraFields?.[index]?.rate?.message}
-                </p>
+                <DateErrorMessage
+                  message={errors?.extraFields?.[index]?.rate?.message}
+                />
               )}
             </div>
             <button
