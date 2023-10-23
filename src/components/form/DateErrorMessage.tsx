@@ -3,5 +3,5 @@ interface DateErrorMessageProps {
 }
 
 export default function DateErrorMessage({ message }: DateErrorMessageProps) {
-  return <p className="-mt-2 text-red-600">{message}</p>;
+  return <p className="-mt-2 text-red-600 dark:text-red-300">{message}</p>;
 }
