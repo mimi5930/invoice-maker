@@ -194,7 +194,7 @@ export default function Form() {
         style={datePickerStyles}
       ></DatePicker>
       {errors.performanceDates && (
-        <p className="-mt-2 text-red-600">{errors.performanceDates?.message}</p>
+        <DateErrorMessage message={errors.performanceDates?.message} />
       )}
       {fields.map((field, index) => {
         return (
@@ -271,7 +271,7 @@ export default function Form() {
               )}
             </div>
             <button
-              className="mb-2 flex align-middle text-xs hover:font-semibold dark:text-slate-200"
+              className="mb-2 flex align-middle text-xs text-[#07074D] hover:font-semibold dark:text-slate-200"
               onClick={() => {
                 remove(index);
               }}
@@ -282,9 +282,9 @@ export default function Form() {
           </div>
         );
       })}
-
+      {/* button to add extra service */}
       <button
-        className="mb-2 flex align-middle text-xs hover:font-semibold dark:text-slate-200"
+        className="mb-2 flex align-middle text-xs text-[#07074D] hover:font-semibold dark:text-slate-200"
         onClick={() => {
           append({ description: "", dates: [], rate: 0 });
         }}

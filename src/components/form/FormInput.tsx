@@ -27,12 +27,16 @@ export default function FormInput({
         {labelTitle}
       </label>
       <input
-        className="h-7 w-full rounded-md border border-[#e0e0e0] bg-white py-3 pl-2 text-base outline-none focus:border-[#6A64F1] focus:shadow-xl"
+        className="h-7 w-full rounded-md border border-blue-400 bg-white py-3 pl-2 text-base outline-none focus:border-[#6A64F1] focus:shadow-xl dark:border-[#e0e0e0]"
         id={id}
         type={type}
         {...register(data)}
       />
-      {errors[data] && <p className="text-red-600 ">{errors[data]?.message}</p>}
+      {errors[data] && (
+        <p className="text-red-600 dark:text-red-300">
+          {errors[data]?.message}
+        </p>
+      )}
     </div>
   );
 }
