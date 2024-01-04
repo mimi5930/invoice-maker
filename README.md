@@ -8,6 +8,8 @@ https://mimi5930.github.io/invoice-maker
 
 Invoice Maker is designed to assist in the creation of a professional, detailed invoice for a musician's personal use.
 
+![screenshot of application](./invoice-maker-screenshot.png)
+
 ## Instructions for Local Usage
 
 1. Download project files from the [Github Repository](https://github.com/mimi5930/invoice-maker)
