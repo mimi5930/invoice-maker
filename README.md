@@ -1,27 +1,29 @@
-# React + TypeScript + Vite
+# Invoice Maker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Website
 
-Currently, two official plugins are available:
+https://mimi5930.github.io/invoice-maker
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Description
 
-## Expanding the ESLint configuration
+Invoice Maker is designed to assist in the creation of a professional, detailed invoice for a musician's personal use.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Instructions for Local Usage
 
-- Configure the top-level `parserOptions` property like this:
+1. Download project files from the [Github Repository](https://github.com/mimi5930/invoice-maker)
+2. Open the root directory and install this project's dependencies
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+```
+npm install
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+3. Run the application on a development server
+
+```
+npm run dev
+```
+
+## Questions
+
+Please email me with any questions
+<mikej.miller440@gmail.com>
